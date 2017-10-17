@@ -10,12 +10,12 @@ import Foundation
 import XCTest
 
 protocol App {
-    var app: XCUIApplication {get}
+    static var app: XCUIApplication? {get}
 }
 
 extension App {
     
-    func tapBackButton() {
-        app.navigationBars.buttons.element(boundBy: 0).tap()
+    static func tapBackButton() {
+        app?.navigationBars.buttons.element(boundBy: 0).tap()
     }
 }

@@ -10,7 +10,18 @@ import XCTest
 import XCTest_Gherkin
 import SBTUITestTunnel
 
-class testSearchMovies: XCTestCase {
+class Feature: XCTestCase {
+    
+    override func setUp() {
+        
+        Home_Page.app = super.app
+        SearchResults_Page.app = super.app
+        
+        super.app.launchTunnel()
+    }
+}
+
+class testSearchMovies: Feature {
     
     func testViewResults() {
         Given("Given I'm viewing the search results section")

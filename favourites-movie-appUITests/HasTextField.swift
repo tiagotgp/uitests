@@ -10,14 +10,14 @@ import Foundation
 import XCTest
 
 protocol HasTextFields: class {
-    var textFields: XCUIElementQuery {get set}
+    static var textFields: XCUIElementQuery? {get}
 }
 
 extension HasTextFields where Self:App {
     
-    func enterText(text: String, elementIdentifier: String) -> Void {
+    static func enterText(text: String, elementIdentifier: String) -> Void {
         UIPasteboard.general.string = text
-        self.textFields[elementIdentifier].doubleTap()
-        app.menuItems["Paste"].tap()
+        self.textFields?[elementIdentifier].doubleTap()
+        self.app?.menuItems["Paste"].tap()
     }
 }

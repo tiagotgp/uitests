@@ -12,61 +12,69 @@ import XCTest
 
 class SearchResults_Page: App, HasTableView, HasTextFields {
     
-    let app: XCUIApplication
-    let searchButton: XCUIElement
-    var tableView: XCUIElement
-    var textFields: XCUIElementQuery
-
-    init(app: XCUIApplication) {
-        self.app = app
-        self.tableView = app.tables["searchResultsTableView"]
-        self.searchButton = app.buttons["searchMoviesButton"]
-        self.textFields = app.textFields
+    static var app: XCUIApplication?
+    static var searchButton: XCUIElement? {
+        get {
+            return app?.buttons["searchMoviesButton"]
+        }
+    }
+    static var tableView: XCUIElement? {
+        get {
+            return app?.tables["searchResultsTableView"]
+        }
+    }
+    static var textFields: XCUIElementQuery? {
+        get {
+            return app?.textFields
+        }
     }
     
-    func getMovieTitles() -> [String] {
+    static func getMovieTitles() -> [String] {
         
         var movieTitles: [String] = []
         
-        for movie in (0..<self.getNumberOfCells()) {
+        for movie in (0 ..< self.getNumberOfCells()) {
             let number:UInt = UInt(movie)
-            movieTitles.append((getMovieDetailsElement(index: number, elementIdentifier: "movieTitle")))
+            guard let movieTitle = self.getMovieDetailsElement(index: number, elementIdentifier: "movieTitle") else { continue }
+            movieTitles.append(movieTitle)
         }
         
         return movieTitles
         
     }
     
-    func getMovieYears() -> [String] {
+    static func getMovieYears() -> [String] {
         
         var movieYears: [String] = []
         
         for movie in (0..<self.getNumberOfCells()) {
             let number:UInt = UInt(movie)
-            movieYears.append((getMovieDetailsElement(index: number, elementIdentifier: "movieYear")))
+            guard let movieYear = self.getMovieDetailsElement(index: number, elementIdentifier: "movieYear") else { continue }
+            movieYears.append(movieYear)
         }
         
         return movieYears
 
     }
     
-    func addMovieToFavourites(index: UInt) -> Void {
-        self.tableView.cells.element(boundBy: index).buttons["favouriteButton"].tap()
+    static func addMovieToFavourites(index: UInt) -> Void {
+        self.tableView?.cells.element(boundBy: index).buttons["favouriteButton"].tap()
     }
     
-    func verifyMovieTitlesAreDisplayed() -> Bool {
+    static func verifyMovieTitlesAreDisplayed() -> Bool {
         return (getMovieTitles().count > 0) ? true : false
     }
     
-    func verifyMovieYearsAreDisplayed() -> Bool {
+    static func verifyMovieYearsAreDisplayed() -> Bool {
         return (getMovieYears().count > 0) ? true : false
     }
     
-    func verifyMovieImagesAreDisplayed() -> Bool {
+    static func verifyMovieImagesAreDisplayed() -> Bool {
         
         for movie in (0..<self.getNumberOfCells()) {
             let number:UInt = UInt(movie)
-            if !self.tableView.cells.element(boundBy: number).images["movieImage"].exists {
+            guard let tableView = self.tableView else { return false }
+            if !tableView.cells.element(boundBy: number).images["movieImage"].exists {
                 return false
             }
         }

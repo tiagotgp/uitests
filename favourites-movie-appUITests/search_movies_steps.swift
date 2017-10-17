@@ -14,26 +14,23 @@ class SearchMoviesSteps: StepDefiner {
     
     override func defineSteps() {
         
-        let app = super.test.app
-        app?.launchTunnel()
-        let home_page = Home_Page(app: app!)
-        let searchResults_page = SearchResults_Page(app: app!)
-        
         step("Given I'm viewing the search results section") {
-            home_page.findMoviesButton.tap()
+            
+            Home_Page.findMoviesButton?.tap()
         }
         
         step("When I search for (.*)") { (matches: [String]) in
             let movieName = matches.first!
-            searchResults_page.enterText(text: movieName, elementIdentifier: "searchMoviesTextField")
+            SearchResults_Page.enterText(text: movieName, elementIdentifier: "searchMoviesTextField")
             
-            MockData.mockResponse(app: app!, requestURL: "https://api.themoviedb.org/3/search/movie\\?api_key=3b45e6afd555c1b95dc09d6469ebc258&query=Star%20Wars", responseFile: "star_wars_search_results.json")
+            MockData.mockResponse(app: super.test.app!, requestURL: "https://api.themoviedb.org/3/search/movie\\?api_key=3b45e6afd555c1b95dc09d6469ebc258&query=Star%20Wars", responseFile: "star_wars_search_results.json")
             
-            searchResults_page.searchButton.tap()
+            SearchResults_Page.searchButton?.tap()
         }
         
         step("Then I should see search results") {
-            XCTAssert((searchResults_page.getNumberOfCells()) > 0)
+//            XCTAssert(SearchResults_Page.getNumberOfCells() > 0)
+            XCTAssert(false)
         }
     }
 }

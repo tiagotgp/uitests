@@ -11,18 +11,20 @@ import XCTest
 
 class Home_Page: App, HasTableView {
     
-    let app: XCUIApplication
-    let findMoviesButton: XCUIElement
-    var tableView: XCUIElement
-    
-    init(app: XCUIApplication) {
-        self.app = app
-        self.findMoviesButton = app.buttons["findMoviesButton"]
-        self.tableView = app.tables["movieTableView"]
+    static var app: XCUIApplication?
+    static var tableView: XCUIElement? {
+        get {
+            return app?.buttons["movieTableView"]
+        }
+    }
+    static var findMoviesButton: XCUIElement? {
+        get {
+            return app?.buttons["findMoviesButton"]
+        }
     }
     
-    func verifyMovieAddedToFavourites(title: String, year: String) -> Bool {
-        for movie in (0..<self.getNumberOfCells()) {
+    static func verifyMovieAddedToFavourites(title: String, year: String) -> Bool {
+        for movie in (0 ..< self.getNumberOfCells()) {
             let number:UInt = UInt(movie)
             if getMovieDetailsElement(index: number, elementIdentifier: "movieTitle") == title && getMovieDetailsElement(index: number, elementIdentifier: "movieYear") == year {
                 return true

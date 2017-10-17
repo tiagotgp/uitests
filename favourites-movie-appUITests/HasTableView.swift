@@ -10,21 +10,22 @@ import Foundation
 import XCTest
 
 protocol HasTableView: class {
-    var tableView: XCUIElement {get set}
+    static var tableView: XCUIElement? {get}
 }
 
 extension HasTableView {
     
-    func getMovieDetailsElement(index: UInt, elementIdentifier: String) -> String {
-        return self.tableView.cells.element(boundBy: index).staticTexts[elementIdentifier].label.description
+    static func getMovieDetailsElement(index: UInt, elementIdentifier: String) -> String? {
+        return self.tableView?.cells.element(boundBy: index).staticTexts[elementIdentifier].label.description
     }
     
-    func getNumberOfCells() -> Int {
+    static func getNumberOfCells() -> Int {
         
-        return Int(bitPattern: (self.tableView.cells.count))
+        guard let tableView = self.tableView else { return 0 }
+        return Int(bitPattern: (tableView.cells.count))
     }
     
-    func getMovieCellIndexByDetails(title: String, year: String) -> UInt? {
+    static func getMovieCellIndexByDetails(title: String, year: String) -> UInt? {
         
         for movie in (0..<self.getNumberOfCells()) {
             let number:UInt = UInt(movie)

@@ -2,8 +2,8 @@
 //  SearchViewController.swift
 //  favourites-movie-app
 //
-//  Created by Goncalves Pereira, Tiago (Tester) on 09/08/2017.
-//  Copyright © 2017 Goncalves Pereira, Tiago (Tester). All rights reserved.
+//  Created by Goncalves Pereira, Tiago on 09/08/2017.
+//  Copyright © 2017 Goncalves Pereira, Tiago. All rights reserved.
 //
 
 import UIKit
@@ -36,10 +36,19 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if let data = data{
             let object = JSONParser.parse(data: data)
             if let object = object {
-                self.searchResults = MovieDataProcessor.mapJsonToMovies(object: object, moviesKey: "results")
-                DispatchQueue.main.async {
+                if MovieDataProcessor.mapJsonToMovies(object: object, moviesKey: "results").isEmpty {
+                    let alert = UIAlertController(title: "No movies found", message: "Search has not found the movies you requested", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title:"OK", style: UIAlertActionStyle.default, handler: nil))
+                    DispatchQueue.main.async {
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+                else {
+                    self.searchResults = MovieDataProcessor.mapJsonToMovies(object: object, moviesKey: "results")
+                    DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
+            }
             }
         }
     }

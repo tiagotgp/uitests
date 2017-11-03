@@ -2,8 +2,8 @@
 //  MovieDataProcessor.swift
 //  favourites-movie-app
 //
-//  Created by Goncalves Pereira, Tiago (Tester) on 10/08/2017.
-//  Copyright © 2017 Goncalves Pereira, Tiago (Tester). All rights reserved.
+//  Created by Goncalves Pereira, Tiago on 10/08/2017.
+//  Copyright © 2017 Goncalves Pereira, Tiago. All rights reserved.
 //
 
 import Foundation

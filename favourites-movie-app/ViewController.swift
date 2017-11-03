@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  favourites-movie-app
 //
-//  Created by Goncalves Pereira, Tiago (Tester) on 08/08/2017.
-//  Copyright © 2017 Goncalves Pereira, Tiago (Tester). All rights reserved.
+//  Created by Goncalves Pereira, Tiago on 08/08/2017.
+//  Copyright © 2017 Goncalves Pereira, Tiago. All rights reserved.
 //
 
 import UIKit

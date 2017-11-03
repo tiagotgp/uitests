@@ -2,8 +2,8 @@
 //  SearchResults_page.swift
 //  favourites-movie-app
 //
-//  Created by Goncalves Pereira, Tiago (Tester) on 11/08/2017.
-//  Copyright © 2017 Goncalves Pereira, Tiago (Tester). All rights reserved.
+//  Created by Goncalves Pereira, Tiago on 11/08/2017.
+//  Copyright © 2017 Goncalves Pereira, Tiago. All rights reserved.
 //
 
 import Foundation
@@ -79,6 +79,17 @@ class SearchResults_Page: App, HasTableView, HasTextFields {
             }
         }
         return true
+    }
+    
+    static func verifyNoMoviesAlertIsDisplayed() -> Bool {
+        
+        let alertTitle = "No movies found"
+        let alertMessage = "Search has not found the movies you requested"
+        
+        if (app?.alerts.staticTexts.allElementsBoundByIndex[0].label)! == alertTitle && (app?.alerts.staticTexts.allElementsBoundByIndex[1].label)! == alertMessage {
+            return true
+        }
+        return false
     }
     
 }

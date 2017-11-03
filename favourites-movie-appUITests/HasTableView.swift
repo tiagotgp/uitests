@@ -2,8 +2,8 @@
 //  HasTable.swift
 //  favourites-movie-app
 //
-//  Created by Goncalves Pereira, Tiago (Tester) on 16/08/2017.
-//  Copyright © 2017 Goncalves Pereira, Tiago (Tester). All rights reserved.
+//  Created by Goncalves Pereira, Tiago on 16/08/2017.
+//  Copyright © 2017 Goncalves Pereira, Tiago. All rights reserved.
 //
 
 import Foundation
@@ -16,7 +16,7 @@ protocol HasTableView: class {
 extension HasTableView {
     
     static func getMovieDetailsElement(index: UInt, elementIdentifier: String) -> String? {
-        return self.tableView?.cells.element(boundBy: index).staticTexts[elementIdentifier].label.description
+        return tableView?.cells.element(boundBy: index).staticTexts[elementIdentifier].label.description
     }
     
     static func getNumberOfCells() -> Int {
@@ -37,6 +37,17 @@ extension HasTableView {
         XCTFail("Cannot find movie")
         return nil
     }
-
     
+    static func getMovieCellIndexByTitle(title: String) -> UInt? {
+        
+        for movie in (0..<self.getNumberOfCells()) {
+            let number:UInt = UInt(movie)
+            if (getMovieDetailsElement(index: number, elementIdentifier: "movieTitle")) == title {
+                return number
+            }
+        }
+        
+        XCTFail("Cannot find movie")
+        return nil
+    }
 }

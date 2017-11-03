@@ -2,8 +2,8 @@
 //  CustomTableViewCell.swift
 //  favourites-movie-app
 //
-//  Created by Goncalves Pereira, Tiago (Tester) on 09/08/2017.
-//  Copyright © 2017 Goncalves Pereira, Tiago (Tester). All rights reserved.
+//  Created by Goncalves Pereira, Tiago on 09/08/2017.
+//  Copyright © 2017 Goncalves Pereira, Tiago. All rights reserved.
 //
 
 import UIKit

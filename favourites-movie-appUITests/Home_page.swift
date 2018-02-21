@@ -23,25 +23,27 @@ class Home_Page: App, HasTableView {
         }
     }
     
-    static func verifyMovieAddedToFavourites(title: String, year: String) -> Bool {
+    static func verifyMovieAddedToFavourites(title: String, year: String) -> Void {
         for movie in (0 ..< self.getNumberOfCells()) {
             let number:UInt = UInt(movie)
             if getMovieDetailsElement(index: number, elementIdentifier: "movieTitle") == title && getMovieDetailsElement(index: number, elementIdentifier: "movieYear") == year {
-                return true
+                return
             }
         }
-        return false
+        XCTFail("Selected movie: \(title) was not added to favourites")
     }
     
-    static func verifyMovieAddedToFavourites(title: String) -> Bool {
+    static func verifyMovieAddedToFavourites(title: String) -> Void {
         for movie in (0 ..< self.getNumberOfCells()) {
             let number:UInt = UInt(movie)
             
             if getMovieDetailsElement(index: number, elementIdentifier: "movieTitle") == title {
-                return true
+                return
             }
         }
-        return false
+        XCTFail("Selected movie: \(title) was not added to favourites")
+        
+        
     }
     
 }

@@ -76,15 +76,19 @@ class SearchResults_Page: App, HasTableView, HasTextFields {
         return true
     }
     
-    static func verifyNoMoviesAlertIsDisplayed() -> Bool {
+    static func verifyNoMoviesAlertIsDisplayed() -> Void {
         
-        let alertTitle = "No movies found"
-        let alertMessage = "Search has not found the movies you requested"
+        let expectedAlertTitle = "No movies found"
+        let expectedAlertMessage = "Search has not found the movies you requested"
         
-        if (app?.alerts.staticTexts.allElementsBoundByIndex[0].label)! == alertTitle && (app?.alerts.staticTexts.allElementsBoundByIndex[1].label)! == alertMessage {
-            return true
-        }
-        return false
+        let actualAlertTitle = (app?.alerts.staticTexts.allElementsBoundByIndex[0].label)!
+        let actualAlertMessage = (app?.alerts.staticTexts.allElementsBoundByIndex[1].label)!
+        
+        XCTAssert(expectedAlertTitle == actualAlertTitle && expectedAlertMessage == actualAlertMessage, "Incorrect copy text: Acutal: \(actualAlertTitle) - \(actualAlertMessage) Expected: \(expectedAlertTitle) - \(expectedAlertMessage)")
+    }
+    
+    static func verifySearchResultsAreDisplayed() -> Void {
+        XCTAssert(SearchResults_Page.getNumberOfCells() > 0, "No search results were found")
     }
     
 }

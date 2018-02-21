@@ -28,7 +28,7 @@ class SearchMoviesSteps: StepDefiner {
         }
         
         step("I should see search results") {
-            XCTAssert(SearchResults_Page.getNumberOfCells() > 0)
+            SearchResults_Page.verifySearchResultsAreDisplayed()
         }
         
         step("I make a search that yields no results") {
@@ -40,7 +40,7 @@ class SearchMoviesSteps: StepDefiner {
         }
         
         step("I should be notified that no movies were found") {
-            XCTAssert(SearchResults_Page.verifyNoMoviesAlertIsDisplayed())
+            SearchResults_Page.verifyNoMoviesAlertIsDisplayed()
         }
     }
 }

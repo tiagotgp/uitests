@@ -34,7 +34,7 @@ extension HasTableView {
             }
         }
         
-        XCTFail("Cannot find movie")
+        XCTFail("Cannot find movie: title: \(title) - year: \(year)")
         return nil
     }
     
@@ -47,7 +47,7 @@ extension HasTableView {
             }
         }
         
-        XCTFail("Cannot find movie")
+        XCTFail("Cannot find movie: title: \(title)")
         return nil
     }
 }

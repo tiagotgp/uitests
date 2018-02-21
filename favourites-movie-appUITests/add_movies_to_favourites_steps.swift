@@ -36,7 +36,7 @@ class addMoviesToFavouritesSteps: StepDefiner {
         
         step("I should see the movie in the favourites list") {
             SearchResults_Page.tapBackButton()
-            XCTAssert(Home_Page.verifyMovieAddedToFavourites(title: movieTitle))
+            Home_Page.verifyMovieAddedToFavourites(title: movieTitle)
         }
     }
 }

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-
 import XCTest
 
 class SearchResults_Page: App, HasTableView, HasTextFields {
@@ -38,9 +37,7 @@ class SearchResults_Page: App, HasTableView, HasTextFields {
             guard let movieTitle = self.getMovieDetailsElement(index: number, elementIdentifier: "movieTitle") else { continue }
             movieTitles.append(movieTitle)
         }
-        
         return movieTitles
-        
     }
     
     static func getMovieYears() -> [String] {
@@ -52,9 +49,7 @@ class SearchResults_Page: App, HasTableView, HasTextFields {
             guard let movieYear = self.getMovieDetailsElement(index: number, elementIdentifier: "movieYear") else { continue }
             movieYears.append(movieYear)
         }
-        
         return movieYears
-
     }
     
     static func addMovieToFavourites(index: UInt) -> Void {

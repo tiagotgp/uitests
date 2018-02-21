@@ -12,15 +12,19 @@ import SBTUITestTunnel
 
 class testSearchMovies: Feature {
     
+    private func background() {
+        Given("I'm viewing the search results section")
+    }
+    
     func testViewResults() {
-        Given("Given I'm viewing the search results section")
-        When("When I search for Star Wars")
-        Then("Then I should see search results")
+        self.background()
+        When("I search for Star Wars")
+        Then("I should see search results")
     }
     
     func testNoMoviesFound() {
-        Given("Given I'm viewing the search results section")
-        When("When I make a search that yields no results")
+        self.background()
+        When("I make a search that yields no results")
         Then("I should be notified that no movies were found")
     }
 }

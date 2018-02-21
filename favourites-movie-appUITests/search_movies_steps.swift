@@ -14,11 +14,11 @@ class SearchMoviesSteps: StepDefiner {
     
     override func defineSteps() {
         
-        step("Given I'm viewing the search results section") {
+        step("I'm viewing the search results section") {
             Home_Page.findMoviesButton?.tap()
         }
         
-        step("When I search for (.*)") { (matches: [String]) in
+        step("I search for (.*)") { (matches: [String]) in
             let movieName = matches.first!
             SearchResults_Page.enterText(text: movieName, elementIdentifier: "searchMoviesTextField")
             
@@ -27,11 +27,11 @@ class SearchMoviesSteps: StepDefiner {
             SearchResults_Page.searchButton?.tap()
         }
         
-        step("Then I should see search results") {
+        step("I should see search results") {
             XCTAssert(SearchResults_Page.getNumberOfCells() > 0)
         }
         
-        step("When I make a search that yields no results") {
+        step("I make a search that yields no results") {
             SearchResults_Page.enterText(text: "No movie results", elementIdentifier: "searchMoviesTextField")
             
             MockData.mockResponse(app: super.test.app!, requestURL: "https://api.themoviedb.org/3/search/movie\\?api_key=3b45e6afd555c1b95dc09d6469ebc258&query=no%20movie%20results", responseFile: "no_results.json")

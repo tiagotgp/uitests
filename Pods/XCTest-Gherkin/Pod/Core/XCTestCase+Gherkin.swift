@@ -251,7 +251,7 @@ extension XCTestCase {
     /**
      Finds and performs a step test based on expression
      */
-    func performStep(_ initialExpression: String) {
+    func performStep(_ initialExpression: String, _ functionName: String = #function) {
 
         func perform(expression: String) {
             
@@ -309,7 +309,7 @@ extension XCTestCase {
             state.currentStepDepth -= 1
         }
         
-        XCTContext.runActivity(named: initialExpression) { (_) in
+        XCTContext.runActivity(named: "\(functionName) \(initialExpression)") { (_) in
             perform(expression: initialExpression)
         }
     }

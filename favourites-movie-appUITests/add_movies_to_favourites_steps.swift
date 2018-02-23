@@ -20,7 +20,7 @@ class addMoviesToFavouritesSteps: StepDefiner {
             let searchTerm = matches.first!
             
             Home_Page.findMoviesButton?.tap()
-            SearchResults_Page.enterText(text: searchTerm, elementIdentifier: "searchMoviesTextField")
+            SearchResults_Page.enterText(text: searchTerm, elementIdentifier: SearchResults_Page.searchMoviesTextFieldIdentifier)
             
             MockData.mockResponse(app: super.test.app!, requestURL: "https://api.themoviedb.org/3/search/movie\\?api_key=3b45e6afd555c1b95dc09d6469ebc258&query=Star%20Wars", responseFile: "star_wars_search_results.json")
             

@@ -20,7 +20,7 @@ class SearchMoviesSteps: StepDefiner {
         
         step("I search for (.*)") { (matches: [String]) in
             let movieName = matches.first!
-            SearchResults_Page.enterText(text: movieName, elementIdentifier: "searchMoviesTextField")
+            SearchResults_Page.enterText(text: movieName, elementIdentifier: SearchResults_Page.searchMoviesTextFieldIdentifier)
             
             MockData.mockResponse(app: super.test.app!, requestURL: "https://api.themoviedb.org/3/search/movie\\?api_key=3b45e6afd555c1b95dc09d6469ebc258&query=Star%20Wars", responseFile: "star_wars_search_results.json")
             
@@ -32,7 +32,7 @@ class SearchMoviesSteps: StepDefiner {
         }
         
         step("I make a search that yields no results") {
-            SearchResults_Page.enterText(text: "No movie results", elementIdentifier: "searchMoviesTextField")
+            SearchResults_Page.enterText(text: "No movie results", elementIdentifier: SearchResults_Page.searchMoviesTextFieldIdentifier)
             
             MockData.mockResponse(app: super.test.app!, requestURL: "https://api.themoviedb.org/3/search/movie\\?api_key=3b45e6afd555c1b95dc09d6469ebc258&query=no%20movie%20results", responseFile: "no_results.json")
             

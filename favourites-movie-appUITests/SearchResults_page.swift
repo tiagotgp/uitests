@@ -11,15 +11,19 @@ import XCTest
 
 class SearchResults_Page: App, HasTableView, HasTextFields {
     
+    static let searchMoviesButtonIdentifier = "searchMoviesButton"
+    static let searchResultsTableViewIdentifier = "searchResultsTableView"
+    static let searchMoviesTextFieldIdentifier = "searchMoviesTextField"
+    
     static var app: XCUIApplication?
     static var searchButton: XCUIElement? {
         get {
-            return app?.buttons["searchMoviesButton"]
+            return app?.buttons[searchMoviesButtonIdentifier]
         }
     }
     static var tableView: XCUIElement? {
         get {
-            return app?.tables["searchResultsTableView"]
+            return app?.tables[searchResultsTableViewIdentifier]
         }
     }
     static var textFields: XCUIElementQuery? {
@@ -34,7 +38,7 @@ class SearchResults_Page: App, HasTableView, HasTextFields {
         
         for movie in (0 ..< self.getNumberOfCells()) {
             let number:UInt = UInt(movie)
-            guard let movieTitle = self.getMovieDetailsElement(index: number, elementIdentifier: "movieTitle") else { continue }
+            guard let movieTitle = self.getMovieDetailsElement(index: number, elementIdentifier: MovieElementIdentifiers.movieTitle) else { continue }
             movieTitles.append(movieTitle)
         }
         return movieTitles
@@ -46,14 +50,14 @@ class SearchResults_Page: App, HasTableView, HasTextFields {
         
         for movie in (0..<self.getNumberOfCells()) {
             let number:UInt = UInt(movie)
-            guard let movieYear = self.getMovieDetailsElement(index: number, elementIdentifier: "movieYear") else { continue }
+            guard let movieYear = self.getMovieDetailsElement(index: number, elementIdentifier: MovieElementIdentifiers.movieYear) else { continue }
             movieYears.append(movieYear)
         }
         return movieYears
     }
     
     static func addMovieToFavourites(index: UInt) -> Void {
-        self.tableView?.cells.element(boundBy: index).buttons["favouriteButton"].tap()
+        self.tableView?.cells.element(boundBy: index).buttons[MovieElementIdentifiers.favouriteButton].tap()
     }
     
     static func verifyMovieTitlesAreDisplayed() -> Bool {
@@ -69,7 +73,7 @@ class SearchResults_Page: App, HasTableView, HasTextFields {
         for movie in (0..<self.getNumberOfCells()) {
             let number:UInt = UInt(movie)
             guard let tableView = self.tableView else { return false }
-            if !tableView.cells.element(boundBy: number).images["movieImage"].exists {
+            if !tableView.cells.element(boundBy: number).images[MovieElementIdentifiers.movieImage].exists {
                 return false
             }
         }

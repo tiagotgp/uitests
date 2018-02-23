@@ -11,22 +11,25 @@ import XCTest
 
 class Home_Page: App, HasTableView {
     
+    static let findMoviesButtonIdentifier = "findMoviesButton"
+    static let movieTableViewIdentifier = "movieTableView"
+    
     static var app: XCUIApplication?
     static var tableView: XCUIElement? {
         get {
-            return app?.tables["movieTableView"]
+            return app?.tables[movieTableViewIdentifier]
         }
     }
     static var findMoviesButton: XCUIElement? {
         get {
-            return app?.buttons["findMoviesButton"]
+            return app?.buttons[findMoviesButtonIdentifier]
         }
     }
     
     static func verifyMovieAddedToFavourites(title: String, year: String) -> Void {
         for movie in (0 ..< self.getNumberOfCells()) {
             let number:UInt = UInt(movie)
-            if getMovieDetailsElement(index: number, elementIdentifier: "movieTitle") == title && getMovieDetailsElement(index: number, elementIdentifier: "movieYear") == year {
+            if getMovieDetailsElement(index: number, elementIdentifier: MovieElementIdentifiers.movieTitle) == title && getMovieDetailsElement(index: number, elementIdentifier: MovieElementIdentifiers.movieYear) == year {
                 return
             }
         }
@@ -37,7 +40,7 @@ class Home_Page: App, HasTableView {
         for movie in (0 ..< self.getNumberOfCells()) {
             let number:UInt = UInt(movie)
             
-            if getMovieDetailsElement(index: number, elementIdentifier: "movieTitle") == title {
+            if getMovieDetailsElement(index: number, elementIdentifier: MovieElementIdentifiers.movieTitle) == title {
                 return
             }
         }

@@ -9,7 +9,7 @@
 import Foundation
 import XCTest
 
-class Home_Page: App, HasTableView {
+class Home_Page: App, HasMoviesTableView {
     
     static let findMoviesButtonIdentifier = "findMoviesButton"
     static let movieTableViewIdentifier = "movieTableView"
